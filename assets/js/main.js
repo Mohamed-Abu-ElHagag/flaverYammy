@@ -1,3 +1,5 @@
+AOS.init();
+const swiper = new Swiper();
 let darkMod = document.querySelector(".darkMode");
 let myNav = document.querySelector(".navbar");
 let myBody = document.querySelector("body");
@@ -138,6 +140,8 @@ let createObject = () => {
     addBtn.style.color = "#000";
     addBtn.style.transition = "all .5s";
     addBtn.innerHTML = "Add";
+    mood = "create";
+    count.style.display = "block";
   }
 
   localStorage.setItem("myProducts", JSON.stringify(allProduct));
@@ -188,3 +192,42 @@ let update = (i) => {
   mood = "update";
   global = i;
 };
+
+//accoordion
+
+let icon = document.querySelectorAll("#icon");
+let answer = document.querySelectorAll("#answer");
+let line = document.querySelectorAll("#line");
+
+for (let i = 0; i < icon.length; i++) {
+  icon[i].addEventListener("click", function () {
+    if (answer[i].style.height == 0) {
+      for (let m = 0; m < icon.length; m++) {
+        if (i == m) {
+          answer[m].style.height = answer[m].scrollHeight + "px";
+          icon[m].style.transform = "rotate(180deg)";
+          line[m].style.width = "60%";
+        } else {
+          answer[m].style.height = null;
+          icon[m].style.transform = "rotate(0deg)";
+          line[m].style.width = "0";
+        }
+      }
+    } else {
+      answer[i].style.height = null;
+      icon[i].style.transform = "rotate(0deg)";
+      line[i].style.width = "0";
+    }
+  });
+}
+let up = document.querySelector("#up");
+window.onscroll=()=>{
+  if(scrollY >= 500){
+    up.style.display ="flex"
+  }else{
+    up.style.display ="none"
+  }
+}
+up.onclick=()=>{
+  scroll(0,0);
+}
